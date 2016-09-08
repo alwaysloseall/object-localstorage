@@ -1,60 +1,6 @@
 # object-localstorage
 can setitems with field of object in localstorage
 
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title>object-localstorage</title>
-		<link rel="stylesheet" href="">
-		<script src="src/object-localstorage.js"></script>
-		<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
-		<style>
-			body {
-				padding: 50px;
-			}
-			input {
-				margin-top: 20px;
-			}
-			#result {
-				margin-top: 10px;
-				font-size: 20px;
-			}
-			#info {
-				font-size: 18px;
-			}
-		</style>
-	</head>
-	<body>
-		<h1>object-localstorage</h1>
-		<div class='input-group'>
-			<input class='form-control' id='inputToStorage' type="text" placeholder='要存入localstorage的字段'>
-			<input class='form-control' id='inputToStorageValue' type="text" placeholder='字段的值'>
-			<button class='btn btn-default' id='setItem'>存入localstorage</button>
-		</div>
-		<input class='form-control' id='inputFromStorage' type="text" placeholder='要从localstorage取出的字段'><button class='btn btn-default' class='btn btn-default' id='getItem'>从localstorage取出</button>
-		<p id='result'></p>
-		<p id='info'>
-			代码实例： 
-			objectLocalstorage.setItem(object.field, value);
-			objectLocalstorage.getItem(object.field);
-		</p>
-		<script>
-			/**
-			 * [Store description]
-			 * objectLocalstorage.setItem(object.field, value);
-			 * objectLocalstorage.getItem(object.field);
-			*/
-			document.getElementById('setItem').addEventListener('click', function () {
-				var key = document.getElementById('inputToStorage').value;
-				var value = document.getElementById('inputToStorageValue').value;
-				objectLocalstorage.setItem(key, value);
-			});
-			document.getElementById('getItem').addEventListener('click', function () {
-				var key = document.getElementById('inputFromStorage').value;
-				var value = objectLocalstorage.getItem(key);
-				document.getElementById('result').innerHTML = key + ' : ' + value;
-			});
-		</script>
-	</body>
-</html>
+set localstorage： objectLocalstorage.setItem(object.field, value);
+
+get localstorage:  objectLocalstorage.getItem(object.field);
