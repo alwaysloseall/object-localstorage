@@ -1,8 +1,8 @@
 (function (window) {
 	/**
 	 * [Store description]
-	 * objectLocalstorage.setItem(object.field, value);
-	 * objectLocalstorage.getItem(object.field);
+	 * objectStorage.setItem(object.field, value);
+	 * objectStorage.getItem(object.field);
 	 */
 	var Store = { 
 		/**
@@ -15,9 +15,31 @@
 			try { return JSON.parse(str); } catch (e) { return str; }
 		},
 		localSetJson: function (key, value) { return localStorage.setItem(key, typeof value == 'object' ? JSON.stringify(value) : value); },
+		/**
+		 * ------------------------------------
+		 * | 对sessionStorage的简单封装
+		 * ------------------------------------
+		 */
+		sessionGetJson: function (key) {
+			var str = sessionStorage.getItem(key);
+			try { return JSON.parse(str); } catch (e) { return str; }
+		},
+		sessionSetJson: function (key, value) { return sessionStorage.setItem(key, typeof value == 'object' ? JSON.stringify(value) : value); }
+
 	};
 
-	var objectLocalstorage = {
+	var type = 'local';
+
+	var objectStorage = {
+		setType: function (value) {
+			if (value != 'local' && value != 'session') {
+				throw new Error('设置了错误的type,type仅能为local or session');
+			}
+			type = value;
+		},
+		getType: function () {
+			return type;
+		},
 		setItem: function (key, value) {
 			if (!key) { return ; }
 			var objKey = undefined;
@@ -25,15 +47,15 @@
 			if (key.split('.').length > 1) { //分离对象键、值
 				objKey = key.split('.')[0];
 				objValue = key.split('.')[1];
-				var oldValues = Store.localGetJson(objKey);
+				var oldValues = Store[type + 'GetJson'](objKey);
 				var newValues = {};
 				newValues[objValue] = value;
 				for (var k in oldValues) { //克隆对象 
 					newValues[k] = oldValues[k];
 				}
-				Store.localSetJson(objKey, newValues);
+				Store[type + 'SetJson'](objKey, newValues);
 			} else {
-				Store.localSetJson(key, value);
+				Store[type + 'SetJson'](key, value);
 			}
 		},
 		getItem: function (key) {
@@ -43,18 +65,18 @@
 			if (key.split('.').length > 1) {
 				objKey = key.split('.')[0];
 				objValue = key.split('.')[1];
-				var values =  Store.localGetJson(objKey);
+				var values =  Store[type + 'GetJson'](objKey);
 				if (!values) { 
-					Store.localSetJson(objKey, {});
+					Store[type + 'SetJson'](objKey, {});
 					return undefined;
 				} else { 
 					return values[objValue];
 				}
 			} else {
-				return Store.localGetJson(key);
+				return Store[type + 'GetJson'](key);
 			}
 		}
 	}
 
-	return window.objectLocalstorage = objectLocalstorage;
+	return window.objectStorage = objectStorage;
 }) (window);
