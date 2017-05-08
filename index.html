@@ -5,7 +5,7 @@
 		<title>object-localstorage</title>
 		<link rel="stylesheet" href="">
 		<script src="src/object-localstorage.js"></script>
-		<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<!--<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">-->
 		<style>
 			body {
 				padding: 50px;
@@ -38,11 +38,11 @@
 			document.getElementById('setItem').addEventListener('click', function () {
 				var key = document.getElementById('inputToStorage').value;
 				var value = document.getElementById('inputToStorageValue').value;
-				objectLocalstorage.setItem(key, value);
+				objectStorage.setItem(key, value);
 			});
 			document.getElementById('getItem').addEventListener('click', function () {
 				var key = document.getElementById('inputFromStorage').value;
-				var value = objectLocalstorage.getItem(key);
+				var value = objectStorage.getItem(key);
 				document.getElementById('result').innerHTML = key + ' : ' + value;
 			});
 		</script>
