@@ -49,10 +49,10 @@
 				objValue = key.split('.')[1];
 				var oldValues = Store[type + 'GetJson'](objKey);
 				var newValues = {};
-				newValues[objValue] = value;
 				for (var k in oldValues) { //克隆对象 
 					newValues[k] = oldValues[k];
 				}
+				newValues[objValue] = value;
 				Store[type + 'SetJson'](objKey, newValues);
 			} else {
 				Store[type + 'SetJson'](key, value);
