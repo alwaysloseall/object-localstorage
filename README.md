@@ -6,11 +6,21 @@
 ## Getting Started
 * setItem:
 ```javascript
-objectStorage.setItem(object.field, value);
+/**
+ * @param  {string} field "object.key"
+ */
+objectStorage.setItem(field: string, value: any);
+// eg:
+objectStorage.setItem('example.test', 'test');
 ```
 * getItem:
 ```javascript
-objectStorage.getItem(object.field);
+/**
+ * @param  {string} field "object.key"
+ */
+objectStorage.getItem(field: string);
+// eg:
+objectStorage.setItem('example.test'); // 'test'
 ```
 * switch to sessionStorage
 ```javascript
@@ -22,5 +32,5 @@ objectStorage.setType('local');
 ```
 * get current type
 ```javascript
-objectStorage.getType('local'); // 'local' or 'session'
+objectStorage.getType(); // 'local' or 'session'
 ```
